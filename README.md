@@ -5,11 +5,11 @@ Simple function to create bitbucket repos from command line.
 Add this function in your .gitconfig
 ```
 [alias]
-	aliasname= "!f() { curl -s -X POST -u USERNAME:APP-PASSWORD -H 'Content-Type: application/json' https://api.bitbucket.org/2.0/repositories/USERNAME/$1 -d '{ \"is_private\": \"true\", \"fork_policy\": \"no_forks\", \"mainbranch\": { \"type\": \"branch\", \"name\": \"master\" }, \"language\": \"android\", \"scm\": \"git\", \"project\": { \"key\": \"PROJECTKEY\"  } }' | /d/installations/jq-win64/jq-win64.exe '.links.clone[].href'; }; f"
+	aliasname= "!f() { curl -s -X POST -u USERNAME:APP-PASSWORD -H 'Content-Type: application/json' https://api.bitbucket.org/2.0/repositories/USERNAME/$2 -d '{ \"name\":\"'$1'\", \"is_private\": \"true\", \"fork_policy\": \"no_forks\", \"mainbranch\": { \"type\": \"branch\", \"name\": \"master\" }, \"language\": \"android\", \"scm\": \"git\", \"project\": { \"key\": \"PROJECTKEY\"  } }' | /d/installations/jq-win64/jq-win64.exe '.links.clone[].href'; }; f"
 ```
 Then create new bitbucket repo from commandline with
 ```
-git aliasname new-repo-name
+git aliasname "NEW REPO NAME" new-repo-name
 ```
 This will output two git remote urls, add this remote url to existing project or use git clone.
   
